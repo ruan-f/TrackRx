@@ -106,6 +106,45 @@ const Tracking = () => {
    setShowCalendar(!showCalendar);
  };
 
+ const openCalendarWindow = () => {
+  const calendarWindow = window.open(
+    "",
+    "Calendar",
+    "width=400,height=500,scrollbars=no,resizable=no"
+  );
+
+  if (calendarWindow) {
+    calendarWindow.document.write(`
+      <html>
+        <head>
+          <title>Select a Date</title>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/4.8.0/react-datepicker.min.css">
+          <style>
+            body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+            .container { display: flex; flex-direction: column; align-items: center; }
+            button { margin-top: 10px; padding: 5px 10px; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <p>Select a date:</p>
+            <input type="date" id="calendarInput">
+            <button onclick="window.opener.updateDate(document.getElementById('calendarInput').value); window.close();">Select</button>
+          </div>
+        </body>
+      </html>
+    `);
+
+    // Allow the parent page to update the date
+    window.updateDate = (dateString) => {
+      const selectedDate = new Date(dateString);
+      setSelectedMonth(selectedDate.toLocaleString("default", { month: "long" }));
+      setSelectedYear(selectedDate.getFullYear());
+      setHighlightedDay(selectedDate.getDate());
+    };
+  }
+};
+
  const data = {
    labels: trackingData.map((d) => d.day.toString()),
    datasets: [
@@ -155,7 +194,7 @@ const Tracking = () => {
        <div className="w-72 h-72 relative">
          <Pie data={data} options={{ responsive: true, cutout: "80%" }} />
          <button
-            onClick={alert("BOO")}
+            onClick={openCalendarWindow}
             className="absolute inset-0 m-auto bg-purple-800 text-white p-2 rounded-full w-12 h-12 flex items-center justify-center"
           >
           📅
