@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import { ArcElement, Chart as ChartJS } from "chart.js";
-
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 ChartJS.register(ArcElement);
 
@@ -32,19 +33,17 @@ const Tracking = () => {
  const [highlightedDay, setHighlightedDay] = useState(today);
  const [medications, setMedications] = useState([]);
  const [newMed, setNewMed] = useState({ name: "", dosage: "", time: "" });
- 
- const isCurrentMonth = selectedMonth === currentMonth && selectedYear === currentYear;
- const [trackingData, setTrackingData] = useState(generateTrackingData(highlightedDay, isCurrentMonth));
-
+ const [trackingData, setTrackingData] = useState(generateTrackingData(highlightedDay, selectedMonth === currentMonth && selectedYear === currentYear));
  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+ const [showCalendar, setShowCalendar] = useState(false); // Calendar state
+
+ const isCurrentMonth = selectedMonth === currentMonth && selectedYear === currentYear;
 
  const handleSymptomChange = (symptom) => {
    setSelectedSymptoms((prevSymptoms) => {
      if (prevSymptoms.includes(symptom)) {
-       // Remove the symptom if it's already in the list (uncheck it)
        return prevSymptoms.filter((item) => item !== symptom);
      } else {
-       // Add the symptom to the list if it's not already there (check it)
        return [...prevSymptoms, symptom];
      }
    });
@@ -98,9 +97,13 @@ const Tracking = () => {
  const toggleSymptom = (symptom) => {
    setSelectedSymptoms((prevSymptoms) =>
      prevSymptoms.includes(symptom)
-       ? prevSymptoms.filter((s) => s !== symptom) // Remove symptom
-       : [...prevSymptoms, symptom] // Add symptom
+       ? prevSymptoms.filter((s) => s !== symptom)
+       : [...prevSymptoms, symptom]
    );
+ };
+
+ const toggleCalendar = () => {
+   setShowCalendar(!showCalendar);
  };
 
  const data = {
@@ -115,11 +118,9 @@ const Tracking = () => {
    ],
  };
 
- const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
  return (
    <div className="relative min-h-screen flex flex-col items-center justify-start pt-6 bg-gray-900">
-     <button onClick={toggleMenu} className="absolute top-4 right-4 p-2 bg-blue-600 text-white rounded-full">&#9776;</button>
+     <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="absolute top-4 right-4 p-2 bg-blue-600 text-white rounded-full">&#9776;</button>
      {isMenuOpen && (
        <div className="absolute top-10 right-4 bg-white shadow-lg rounded-md p-4 w-48">
          <ul>
@@ -153,6 +154,12 @@ const Tracking = () => {
        <h2 className="text-2xl font-bold mb-4">Tracking - {selectedMonth} {highlightedDay} of the cycle</h2>
        <div className="w-72 h-72 relative">
          <Pie data={data} options={{ responsive: true, cutout: "80%" }} />
+         <button
+            onClick={alert("BOO")}
+            className="absolute inset-0 m-auto bg-purple-800 text-white p-2 rounded-full w-12 h-12 flex items-center justify-center"
+          >
+          📅
+      </button>
        </div>
        <div className="flex mt-4 space-x-4">
          <button className="bg-blue-500 px-4 py-2 rounded text-white" onClick={() => adjustDate(-1)}>← Previous Day</button>
@@ -163,7 +170,6 @@ const Tracking = () => {
          }}>Back to Today</button>
          <button className="bg-blue-500 px-4 py-2 rounded text-white" onClick={() => adjustDate(1)}>Next Day →</button>
        </div>
-
        {/* Medication Tracker */}
        <div className="mt-10 w-1/2">
          <h3 className="text-xl font-bold text-center">Medication Tracker</h3>
@@ -187,12 +193,12 @@ const Tracking = () => {
        </div>
 
        {/* Symptom selection section */}
-        <div className="mt-8 w-2/3 mb-8">
+        <div className="mt-8 w-full mb-8">
           <h3 className="text-xl font-bold text-center">Symptoms</h3>
-          <div className="mt-4 grid grid-cols-3 gap-4">
+          <div className="mt-4 grid grid-cols-4 gap-4">
             {[
               "Headache", "Fatigue", "Nausea", "Mood swings",
-              "Cramps", "Dizziness", "Back pain", "Bloating",
+              "Dizziness", "Bloating", "Restlessness", "Irritable", "Light headed", "Insomnia", "Constipation", "Diarrhea"
             ].map((symptom, index) => (
               <label key={index} className="flex flex-col items-center mt-4 space-y-2 text-white">
                 <div
