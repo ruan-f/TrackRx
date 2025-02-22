@@ -1,4 +1,3 @@
-// pages/personal-info.js
 "use client"; // This ensures that this page uses client-side rendering
 
 import { useState } from "react";
@@ -13,6 +12,7 @@ export default function PersonalInfo() {
     medicalHistory: "",
   });
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for toggling the menu
   const router = useRouter(); // Initialize the router
 
   const handleChange = (e) => {
@@ -29,9 +29,62 @@ export default function PersonalInfo() {
     // You could send this form data to an API here, or store it in local state
   };
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen); // Function to toggle the menu
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-8">
-      <header className="mb-8 text-center">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      {/* Menu Button */}
+      <button
+        onClick={toggleMenu}
+        className="absolute top-4 right-4 p-2 bg-blue-600 text-white rounded-full"
+      >
+        &#9776; {/* This is the hamburger icon */}
+      </button>
+
+      {/* Menu Dropdown */}
+      {isMenuOpen && (
+        <div className="absolute top-10 right-4 bg-white shadow-lg rounded-md p-4 w-48">
+          <ul>
+            <li>
+              <a
+                href="/"
+                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
+              >
+                Home
+              </a>
+            </li>
+            <button>
+              {/* Personal Info Link - Disable navigation */}
+              <a
+                href="#"
+                //onClick={(e) => e.preventDefault()} // Prevent navigation on click
+                className="block px-4 py-2 text-blue-600 bg-gray-200"
+              >
+                Personal Info
+              </a>
+            </button>
+            {/* Add other menu items here */}
+            <li>
+              <a
+                href="/about"
+                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="/contact"
+                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+
+      <header className="text-center mb-8">
         <h1 className="text-4xl font-bold text-blue-600 mb-4">Personal Information</h1>
         <p className="text-lg text-gray-600">Please provide your details below:</p>
       </header>
@@ -109,13 +162,12 @@ export default function PersonalInfo() {
               Save Info
             </button>
 
-            <button
-              type="button"
-              onClick={() => router.push('/')} // Navigate back to home when clicked
-              className="px-6 py-2 bg-gray-600 text-white rounded-full"
+            <a
+              href="/"
+              className="px-6 py-2 bg-gray-600 text-white rounded-full text-center"
             >
               Back to Home
-            </button>
+            </a>
           </div>
         </form>
       </main>
