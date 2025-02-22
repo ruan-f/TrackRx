@@ -1,7 +1,7 @@
 "use client"; // This ensures that this page uses client-side rendering
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Import the useRouter hook for navigation
+import { useNavigate } from "react-router-dom"; // React Router's useNavigate for navigation
 
 export default function PersonalInfo() {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ export default function PersonalInfo() {
   });
 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for toggling the menu
-  const router = useRouter(); // Initialize the router
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +47,7 @@ export default function PersonalInfo() {
           <ul>
             <li>
               <a
-                href="/"
+                href="#/"
                 className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
               >
                 Home
@@ -56,9 +56,8 @@ export default function PersonalInfo() {
             <button>
               {/* Personal Info Link - Disable navigation */}
               <a
-                href="#"
-                //onClick={(e) => e.preventDefault()} // Prevent navigation on click
-                className="block px-4 py-2 text-blue-600 bg-gray-200"
+                href="#/personal-info"
+                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
               >
                 Personal Info
               </a>
@@ -66,7 +65,7 @@ export default function PersonalInfo() {
             {/* Add other menu items here */}
             <li>
               <a
-                href="/about"
+                href="#/about"
                 className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
               >
                 About
@@ -74,7 +73,7 @@ export default function PersonalInfo() {
             </li>
             <li>
               <a
-                href="/contact"
+                href="#/contact"
                 className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
               >
                 Contact
@@ -154,7 +153,7 @@ export default function PersonalInfo() {
             />
           </div>
 
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-center">
             <button
               type="submit"
               className="px-6 py-2 bg-blue-600 text-white rounded-full"
@@ -162,12 +161,6 @@ export default function PersonalInfo() {
               Save Info
             </button>
 
-            <a
-              href="/"
-              className="px-6 py-2 bg-gray-600 text-white rounded-full text-center"
-            >
-              Back to Home
-            </a>
           </div>
         </form>
       </main>

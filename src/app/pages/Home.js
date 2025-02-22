@@ -8,8 +8,8 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState(null);
 
   const sections = [
-    { label: "About Us", link: "/about" },
     { label: "Our Services", link: "/services" },
+    { label: "About Us", link: "/about" },
     { label: "Contact", link: "/contact" },
     { label: "Personal Info", link: "/personal-info" },
     { label: "Tracking", link: "/tracking" },
