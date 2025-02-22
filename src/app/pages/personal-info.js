@@ -126,6 +126,9 @@ export default function PersonalInfo() {
           </div>
         </form>
       </main>
+      <footer className="mt-24 text-center text-gray-500 mb-8">
+        <p>&copy; {new Date().getFullYear()} TrackRx. All rights reserved.</p>
+      </footer>
     </div>
   );
 }

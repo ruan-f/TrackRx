@@ -108,10 +108,6 @@ const Tracking = () => {
    );
  };
 
- const toggleCalendar = () => {
-   setShowCalendar(!showCalendar);
- };
-
  const openCalendarWindow = () => {
   const calendarWindow = window.open(
     "",
@@ -135,8 +131,19 @@ const Tracking = () => {
           <div class="container">
             <p>Select a date:</p>
             <input type="date" id="calendarInput">
-            <button onclick="window.opener.updateDate(document.getElementById('calendarInput').value); window.close();">Select</button>
+            <button id="selectButton">Select</button>
           </div>
+    
+          <script>
+            document.getElementById('selectButton').addEventListener('click', function() {
+              const dateInput = document.getElementById('calendarInput').value;
+              if (!dateInput) {
+                alert('Please select a valid date.');
+                return;
+              }
+              window.opener.updateDate(dateInput);
+            });
+          </script>
         </body>
       </html>
     `);
@@ -262,6 +269,10 @@ const Tracking = () => {
 
 
      </div>
+
+     <footer className="mt-24 text-center text-gray-500 mb-8">
+        <p>&copy; {new Date().getFullYear()} TrackRx. All rights reserved.</p>
+      </footer>
    </div>
  );
 };

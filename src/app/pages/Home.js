@@ -9,7 +9,7 @@ export default function Home() {
 
   const sections = [
     { label: "AI Assistant", link: "/AI-Assistant" },
-  
+    { label: "About Us", link: "/about" },
     { label: "Personal Info", link: "/personal-info" },
     { label: "Tracking", link: "/tracking" },
   ];
@@ -19,7 +19,7 @@ export default function Home() {
       <header className="mb-12 text-center">
         <h1 className="text-4xl font-bold text-blue-600 mb-8">Welcome to TrackRx!</h1>
         <p className="text-lg text-gray-600">
-          A simple way to track your prescriptions and medication.
+          A centralized tool to track your medication and symptoms.
         </p>
       </header>
 
@@ -41,8 +41,8 @@ export default function Home() {
                     activeSection === index ? "scale-125 rotate-[60deg]" : "scale-100"
                   }`}
                   style={{
-                    transform: `rotate(${((index * 360) / sections.length)+30}deg) translate(180px) rotate(${
-                      (360 - (index * 360) / sections.length-30)
+                    transform: `rotate(${((index * 360) / sections.length)}deg) translate(180px) rotate(${
+                      (360 - (index * 360) / sections.length)
                     }deg)`,
                   }}
                 >
@@ -70,32 +70,20 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="text-center mt-8">
-          <h2 className="text-2xl font-semibold text-gray-800">Features:</h2>
-          <ul className="mt-4 text-lg text-gray-700">
-            <li>Track your prescriptions effortlessly</li>
-            <li>Instant updates on your medication status</li>
-            <li>Easy-to-use interface</li>
+        <div className="text-center mt-16">
+          <ul className="mt-4 text-lg text-gray-700 grid grid-cols-3 gap-4">
+            <li className="font-bold mt-4">Tracking:</li>
+            <li className="font-bold mt-4">Personal Info:</li>
+            <li className="font-bold mt-4">AI Assistant:</li>
+            <li>Easy way to daily track medication, dosage, and time of taking as well as daily symptoms</li>
+            <li>Complete the personalized experience with optional custom information to better understand your heatlh</li>
+            <li>Based on your info, the AI Assistant is uniquely prepared to answer any questions at any time!</li>
           </ul>
         </div>
 
-        <div className="flex gap-4 mt-8">
-          <Link
-            to="/about"
-            className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700"
-          >
-            Learn More
-          </Link>
-          <Link
-            to="/contact"
-            className="px-6 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-900"
-          >
-            Contact Us
-          </Link>
-        </div>
       </main>
 
-      <footer className="mt-12 text-center text-gray-500">
+      <footer className="mt-24 text-center text-gray-500">
         <p>&copy; {new Date().getFullYear()} TrackRx. All rights reserved.</p>
       </footer>
     </div>

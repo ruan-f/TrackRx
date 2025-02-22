@@ -6,6 +6,7 @@ import PersonalInfo from './pages/personal-info';
 import Home from './pages/Home'; // Assuming you have a Home component
 import AIAssistant from './pages/AI-Assistant';
 import Tracking from "./pages/tracking";
+import About from "./pages/about";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/personal-info" element={<PersonalInfo />} />
         <Route path="/AI-Assistant" element={<AIAssistant />} />
         <Route path="/tracking" element={<Tracking />} />
+        <Route path="/about" element={<About />} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>
