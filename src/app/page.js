@@ -5,6 +5,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import PersonalInfo from "./pages/personal-info";
+import Tracking from "./pages/tracking";
+
 
 function App() {
   return (
