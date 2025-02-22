@@ -32,53 +32,15 @@ export default function PersonalInfo() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen); // Function to toggle the menu
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      {/* Menu Button */}
-      <button
-        onClick={toggleMenu}
-        className="absolute top-4 right-4 p-2 bg-blue-600 text-white rounded-full"
-      >
-        &#9776; {/* This is the hamburger icon */}
-      </button>
-
-      {/* Menu Dropdown */}
+    <div className="relative min-h-screen flex flex-col items-center justify-start pt-6">
+      <button onClick={toggleMenu} className="absolute top-4 right-4 p-2 bg-blue-600 text-white rounded-full">&#9776;</button>
       {isMenuOpen && (
         <div className="absolute top-10 right-4 bg-white shadow-lg rounded-md p-4 w-48">
           <ul>
-            <li>
-              <a
-                href="#/"
-                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
-              >
-                Home
-              </a>
-            </li>
-            <button>
-              {/* Personal Info Link - Disable navigation */}
-              <a
-                href="#/personal-info"
-                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
-              >
-                Personal Info
-              </a>
-            </button>
-            {/* Add other menu items here */}
-            <li>
-              <a
-                href="#/about"
-                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="#/contact"
-                className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
-              >
-                Contact
-              </a>
-            </li>
+            <li><a href="#/" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">Home</a></li>
+            <li><a href="#/personal-info" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">Personal Info</a></li>
+            <li><a href="#/AI-Assistant" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">AI Assistant</a></li>
+            <li><a href="#/tracking" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">Tracking</a></li>
           </ul>
         </div>
       )}

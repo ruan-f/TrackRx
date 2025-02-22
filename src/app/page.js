@@ -4,7 +4,7 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import PersonalInfo from './pages/personal-info';
 import Home from './pages/Home'; // Assuming you have a Home component
-import Services from './pages/services';
+import AIAssistant from './pages/AI-Assistant';
 import Tracking from "./pages/tracking";
 
 function App() {
@@ -13,7 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/personal-info" element={<PersonalInfo />} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/AI-Assistant" element={<AIAssistant />} />
+        <Route path="/tracking" element={<Tracking />} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>

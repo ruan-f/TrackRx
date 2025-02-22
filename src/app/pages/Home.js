@@ -8,9 +8,8 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState(null);
 
   const sections = [
-    { label: "Our Services", link: "/services" },
-    { label: "About Us", link: "/about" },
-    { label: "Contact", link: "/contact" },
+    { label: "AI Assistant", link: "/AI-Assistant" },
+  
     { label: "Personal Info", link: "/personal-info" },
     { label: "Tracking", link: "/tracking" },
   ];
@@ -42,8 +41,8 @@ export default function Home() {
                     activeSection === index ? "scale-125 rotate-[60deg]" : "scale-100"
                   }`}
                   style={{
-                    transform: `rotate(${((index * 360) / sections.length)-20}deg) translate(180px) rotate(${
-                      (360 - (index * 360) / sections.length+20)
+                    transform: `rotate(${((index * 360) / sections.length)+30}deg) translate(180px) rotate(${
+                      (360 - (index * 360) / sections.length-30)
                     }deg)`,
                   }}
                 >
