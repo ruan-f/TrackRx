@@ -4,7 +4,9 @@ import { ArcElement, Chart as ChartJS } from "chart.js";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
+
 ChartJS.register(ArcElement);
+
 
 const DAYS_IN_CYCLE = 30; // Adjustable cycle length
 
@@ -17,6 +19,7 @@ const getCurrentDateInfo = () => {
  };
 };
 
+
 const generateTrackingData = (highlightedDay, isCurrentMonth) => {
  return Array.from({ length: DAYS_IN_CYCLE }, (_, i) => ({
    day: i + 1,
@@ -24,6 +27,7 @@ const generateTrackingData = (highlightedDay, isCurrentMonth) => {
    isHighlighted: i + 1 === highlightedDay,
  }));
 };
+
 
 const Tracking = () => {
  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for toggling the menu
@@ -49,9 +53,11 @@ const Tracking = () => {
    });
  };
 
+
  useEffect(() => {
    setTrackingData(generateTrackingData(highlightedDay, isCurrentMonth));
  }, [highlightedDay, selectedMonth, selectedYear]);
+
 
  const adjustDate = (increment) => {
    let newDay = highlightedDay + increment;
@@ -260,4 +266,10 @@ const Tracking = () => {
  );
 };
 
+
 export default Tracking;
+
+
+
+
+
