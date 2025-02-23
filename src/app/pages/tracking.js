@@ -118,34 +118,131 @@ const Tracking = () => {
   if (calendarWindow) {
     calendarWindow.document.write(`
       <html>
-        <head>
-          <title>Select a Date</title>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/4.8.0/react-datepicker.min.css">
-          <style>
-            body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-            .container { display: flex; flex-direction: column; align-items: center; }
-            button { margin-top: 10px; padding: 5px 10px; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <p>Select a date:</p>
-            <input type="date" id="calendarInput">
-            <button id="selectButton">Select</button>
-          </div>
-    
-          <script>
-            document.getElementById('selectButton').addEventListener('click', function() {
-              const dateInput = document.getElementById('calendarInput').value;
-              if (!dateInput) {
-                alert('Please select a valid date.');
-                return;
-              }
-              window.opener.updateDate(dateInput);
-            });
-          </script>
-        </body>
-      </html>
+  <head>
+    <title>Select a Date</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/4.8.0/react-datepicker.min.css">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-gap: 5px;
+        justify-items: center;
+        margin-top: 20px;
+      }
+      .calendar button {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .calendar button:hover {
+        background-color: #f0f0f0;
+      }
+      .calendar .today {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .calendar .selected {
+        background-color: #00BFFF;
+        color: white;
+      }
+      button {
+        margin-top: 10px;
+        padding: 5px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button id="prevMonth">Prev Month</button>
+      <p id="monthDisplay"></p>
+      <button id="nextMonth">Next Month</button>
+
+      <div class="calendar" id="calendarGrid"></div>
+
+      <button id="selectButton">Select Date</button>
+    </div>
+
+    <script>
+      let currentDate = new Date();
+      let selectedDate = null;
+
+      function renderCalendar() {
+        const month = currentDate.getMonth();
+        const year = currentDate.getFullYear();
+
+        // Set month display
+        const monthName = currentDate.toLocaleString('default', { month: 'long' });
+        document.getElementById('monthDisplay').innerText = monthName + " " + year;
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startDay = firstDay.getDay();
+        const calendarGrid = document.getElementById('calendarGrid');
+
+        // Clear the grid before rendering
+        calendarGrid.innerHTML = '';
+
+        // Add empty cells before the first day of the month
+        for (let i = 0; i < startDay; i++) {
+          const emptyCell = document.createElement('button');
+          calendarGrid.appendChild(emptyCell);
+        }
+
+        // Add days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dayButton = document.createElement('button');
+          dayButton.innerText = day;
+          dayButton.addEventListener('click', function () {
+            selectedDate = new Date(year, month, day);
+            document.querySelectorAll('.calendar button').forEach(btn => btn.classList.remove('selected'));
+            dayButton.classList.add('selected');
+          });
+          if (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+            dayButton.classList.add('today');
+          }
+          calendarGrid.appendChild(dayButton);
+        }
+      }
+
+      document.getElementById('prevMonth').addEventListener('click', function () {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+      });
+
+      document.getElementById('nextMonth').addEventListener('click', function () {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+      });
+
+      document.getElementById('selectButton').addEventListener('click', function () {
+        if (selectedDate) {
+          window.opener.updateDate(selectedDate.toISOString().split('T')[0]);
+        } else {
+          alert('Please select a valid date.');
+        }
+      });
+
+      // Initial render
+      renderCalendar();
+    </script>
+  </body>
+</html>
+
+
     `);
 
     // Allow the parent page to update the date
@@ -180,6 +277,7 @@ const Tracking = () => {
            <li><a href="#/personal-info" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">Personal Info</a></li>
            <li><a href="#/AI-Assistant" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">AI Assistant</a></li>
            <li><a href="#/tracking" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">Tracking</a></li>
+           <li><a href="#/about" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">About Us</a></li>
          </ul>
        </div>
      )}

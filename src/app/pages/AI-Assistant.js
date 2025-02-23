@@ -93,6 +93,7 @@ export default function OurServices() {
                 Tracking
               </a>
             </li>
+            <li><a href="#/about" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">About Us</a></li>
           </ul>
         </div>
       )}

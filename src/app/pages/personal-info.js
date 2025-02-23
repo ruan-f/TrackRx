@@ -10,6 +10,9 @@ export default function PersonalInfo() {
     height: "",
     age: "",
     medicalHistory: "",
+    psychiatristName: "",
+    psychiatristEmail: "",
+    diagnosis: "",
   });
 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for toggling the menu
@@ -41,6 +44,7 @@ export default function PersonalInfo() {
             <li><a href="#/personal-info" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">Personal Info</a></li>
             <li><a href="#/AI-Assistant" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">AI Assistant</a></li>
             <li><a href="#/tracking" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">Tracking</a></li>
+            <li><a href="#/about" className="block px-4 py-2 text-blue-600 hover:bg-gray-100">About Us</a></li>
           </ul>
         </div>
       )}
@@ -115,6 +119,30 @@ export default function PersonalInfo() {
             />
           </div>
 
+          <div className="mb-4">
+            <label htmlFor="psychiatristName" className="block text-gray-700">Psychiatrist Name:</label>
+            <input
+              type="text"
+              id="psychiatristName"
+              name="psychiatristName"
+              value={formData.psychiatristName}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="psychiatristEmail" className="block text-gray-700">Psychiatrist Email:</label>
+            <input
+              type="email"
+              id="psychiatristEmail"
+              name="psychiatristEmail"
+              value={formData.psychiatristEmail}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
           <div className="flex justify-center">
             <button
               type="submit"
@@ -122,7 +150,6 @@ export default function PersonalInfo() {
             >
               Save Info
             </button>
-
           </div>
         </form>
       </main>
