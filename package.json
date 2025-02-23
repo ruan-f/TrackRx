@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.3.0",
     "@radix-ui/react-slot": "^1.1.2",
     "@sanity/client": "^6.28.0",
     "@sanity/icons": "^3.6.0",

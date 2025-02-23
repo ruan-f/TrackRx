@@ -1,10 +1,17 @@
 "use client"; // This marks this file as a client-side component
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
+import LoginButton from '../signInButton';
+import LogoutButton from '../signOutButton';
+import Profile from '../profile';
 
 export default function Home() {
+  const { isAuthenticated } = useAuth0();  // Destructure isAuthenticated from the Auth0 hook
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // Initially set as false
+  
   const [activeSection, setActiveSection] = useState(null);
 
   const sections = [
@@ -14,8 +21,31 @@ export default function Home() {
     { label: "Tracking", link: "/tracking" },
   ];
 
+  // Update isLoggedIn state when authentication status changes
+  useEffect(() => {
+    setIsLoggedIn(isAuthenticated);
+  }, [isAuthenticated]);  // This effect will run every time isAuthenticated changes
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-8">
+    <div className="flex flex-col min-h-screen bg-gray-100 p-8">
+      <Auth0Provider
+        domain="dev-dtie426q7e5vtlk3.us.auth0.com"
+        clientId="Ys6mDeAnm2L1JGDxeUR1jcvvUSok0Okg"
+        authorizationParams={{
+          redirect_uri: window.location.origin
+        }}
+      >
+        <div className="absolute top-8 items-right justify-right min-h-screen bg-gray-100 p-8">
+          
+            <div className="grid grid-cols-1">
+              <LoginButton />
+              <Profile />
+              <LogoutButton />
+            </div>
+          
+        </div>
+      </Auth0Provider>
+
       <header className="mb-12 text-center">
         <h1 className="text-4xl font-bold text-blue-600 mb-8">Welcome to TrackRx!</h1>
         <p className="text-lg text-gray-600">
@@ -24,7 +54,6 @@ export default function Home() {
       </header>
 
       <main className="flex flex-col items-center gap-6">
-
         <div className="relative mt-8">
           {/* Circular Menu Container */}
           <div className="w-[400px] h-[400px] rounded-full bg-gradient-to-tl from-blue-600 to-purple-600 flex items-center justify-center p-4 transition-all duration-500 ease-in-out hover:scale-110">
