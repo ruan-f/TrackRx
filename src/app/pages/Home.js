@@ -100,12 +100,12 @@ export default function Home() {
         </div>
 
         <div className="text-center mt-16">
-          <ul className="mt-4 text-lg text-gray-700 grid grid-cols-3 gap-4">
+          <ul className="mt-4 text-lg text-gray-700 grid grid-cols-1 gap-4">
             <li className="font-bold mt-4">Tracking:</li>
-            <li className="font-bold mt-4">Personal Info:</li>
-            <li className="font-bold mt-4">AI Assistant:</li>
             <li>Easy way to daily track medication, dosage, and time of taking as well as daily symptoms</li>
+            <li className="font-bold mt-4">Personal Info:</li>
             <li>Complete the personalized experience with optional custom information to better understand your heatlh</li>
+            <li className="font-bold mt-4">AI Assistant:</li>
             <li>Based on your info, the AI Assistant is uniquely prepared to answer any questions at any time!</li>
           </ul>
         </div>

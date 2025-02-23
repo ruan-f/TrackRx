@@ -81,6 +81,10 @@ const Tracking = () => {
    setHighlightedDay(newDay);
  };
 
+ const weeklyMedication1 = ["true","false", "true","true", "true", "false"];
+ const weeklyMedication2 = ["true","true", "true","false", "true", "true"];
+ const weeklyMedication3 = ["false","false", "true","false", "true", "true"];
+
  const addMedication = () => {
    if (newMed.name && newMed.dosage && newMed.time) {
      setMedications((prevMeds) =>
@@ -99,6 +103,8 @@ const Tracking = () => {
      prevMeds.map((med, i) => (i === index ? { ...med, taken: !med.taken } : med))
    );
  };
+
+ 
 
  const toggleSymptom = (symptom) => {
    setSelectedSymptoms((prevSymptoms) =>
@@ -245,6 +251,13 @@ const Tracking = () => {
 
     `);
 
+    window.updateDate = (dateString) => {
+      const selectedDate = new Date(dateString);
+      setSelectedMonth(selectedDate.toLocaleString("default", { month: "long" }));
+      setSelectedYear(selectedDate.getFullYear());
+      setHighlightedDay(selectedDate.getDate());
+    };
+
     // Allow the parent page to update the date
     window.updateDate = (dateString) => {
       const selectedDate = new Date(dateString);
@@ -320,6 +333,7 @@ const Tracking = () => {
          }}>Back to Today</button>
          <button className="bg-blue-500 px-4 py-2 rounded text-white" onClick={() => adjustDate(1)}>Next Day →</button>
        </div>
+
        {/* Medication Tracker */}
        <div className="mt-10 w-1/2">
          <h3 className="text-xl font-bold text-center">Medication Tracker</h3>
@@ -329,6 +343,37 @@ const Tracking = () => {
            <input type="time" className="px-2 py-1 text-black rounded" value={newMed.time} onChange={(e) => setNewMed({ ...newMed, time: e.target.value })} />
            <button className="bg-green-500 px-3 py-1 rounded" onClick={addMedication}>+</button>
          </div>
+
+         <ul className="mt-4">
+             <li  className="flex justify-between items-center bg-gray-800 px-4 py-2 mt-2 rounded">
+               <span>Venlafaxine - 150mg at 7:00AM</span>
+               <div className="flex space-x-2">
+                 <input type="checkbox" />
+                 <button className="bg-red-500 px-2 py-1 rounded text-white" onClick={() => removeMedication(index)}>-</button>
+               </div>
+             </li>
+         </ul>
+
+         <ul className="mt-4">
+             <li  className="flex justify-between items-center bg-gray-800 px-4 py-2 mt-2 rounded">
+               <span>Buspirone - 7.5mg at 12:00PM</span>
+               <div className="flex space-x-2">
+                 <input type="checkbox" />
+                 <button className="bg-red-500 px-2 py-1 rounded text-white" onClick={() => removeMedication(index)}>-</button>
+               </div>
+             </li>
+         </ul>
+
+         <ul className="mt-4">
+             <li  className="flex justify-between items-center bg-gray-800 px-4 py-2 mt-2 rounded">
+               <span>Aripiprazole - 5mg at 7:00AM</span>
+               <div className="flex space-x-2">
+                 <input type="checkbox" />
+                 <button className="bg-red-500 px-2 py-1 rounded text-white" onClick={() => removeMedication(index)}>-</button>
+               </div>
+             </li>
+         </ul>
+
          <ul className="mt-4">
            {medications.map((med, index) => (
              <li key={index} className="flex justify-between items-center bg-gray-800 px-4 py-2 mt-2 rounded">
@@ -340,6 +385,7 @@ const Tracking = () => {
              </li>
            ))}
          </ul>
+
        </div>
 
        {/* Symptom selection section */}

@@ -143,6 +143,23 @@ export default function PersonalInfo() {
             />
           </div>
 
+          {/* New Checkbox for Automatic Monthly Emails */}
+          <div className="mb-4">
+          <div className="inline-flex">
+          <input
+              type="checkbox"
+              
+              className="w-5 h-5 alight-right"
+            />
+            </div>
+            <div className="inline-flex">
+            <label htmlFor="autoRefillEmails" className="block text-gray-700">
+              Would you like automatic monthly emails sent out on your behalf for prescription refills?
+            </label>
+            </div>
+            
+          </div>
+
           <div className="flex justify-center">
             <button
               type="submit"

@@ -46,7 +46,7 @@ export default function OurServices() {
         messages: [
           {
             role: "user",
-            content: `Help me with my medication, reply in HTML format, bolding headers ${serviceName}`,
+            content: `Help me with my medication. I am a 5'2" 18 year old female taking 150mg of Venlafaxine in the morning, 7.5mg of buspirone at noon, and 5mg of aripiprizole at evenings. Suggest alternative medications as necessary. Reply briefly in HTML format, bolding headers and adding line breaks ${serviceName}`,
           },
         ],
         model: "llama-3.3-70b-versatile",
